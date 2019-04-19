@@ -1,0 +1,4 @@
+mapResource = 
+{
+    ["ResKey_Action_1200"] = "dct.lua",
+} -- end of mapResource
