@@ -56,7 +56,7 @@ options =
     ["VR"] = 
     {
         ["use_mouse"] = true,
-        ["hand_controllers"] = true,
+        ["hand_controllers"] = false,
         ["custom_IPD"] = 63.5,
         ["custom_IPD_enable"] = false,
         ["enable"] = true,
@@ -80,7 +80,7 @@ options =
         ["MSAA"] = 0,
         ["SSAA"] = 0,
         ["height"] = 1440,
-        ["forestDistanceFactor"] = 0.85,
+        ["forestDistanceFactor"] = 1,
         ["cockpitGI"] = 1,
         ["terrainTextures"] = "max",
         ["multiMonitorSetup"] = "1camera",
@@ -139,7 +139,7 @@ options =
         ["AV8BNA"] = 
         {
             ["CPLocalList"] = "default",
-            ["INS_Alignment"] = 0,
+            ["INS_Alignment"] = 2,
             ["INS_GYROHasNAV"] = false,
             ["MPCD_EXPORT"] = false,
         }, -- end of ["AV8BNA"]
