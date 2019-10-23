@@ -1,4 +1,6 @@
 mapResource = 
 {
-    ["ResKey_Action_1200"] = "dct.lua",
+    ["ResKey_Action_1797"] = "Moose.lua",
+    ["ResKey_Action_1908"] = "dct-mission-init.lua",
+    ["ResKey_Action_1798"] = "OEOTesting.lua",
 } -- end of mapResource
