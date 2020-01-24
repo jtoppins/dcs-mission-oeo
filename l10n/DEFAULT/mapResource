@@ -2,8 +2,8 @@ mapResource =
 {
     ["ResKey_advancedFile_2394"] = "SOS.ogg",
     ["ResKey_Action_2402"] = "IADS.lua",
-    ["ResKey_Action_1869"] = "Moose.lua",
     ["ResKey_Action_2398"] = "LivesSystem.lua",
+    ["ResKey_Action_1869"] = "Moose.lua",
     ["ResKey_Action_1922"] = "dct-mission-init.lua",
     ["ResKey_Action_2211"] = "OEOMOOSEv0_4_9.lua",
 } -- end of mapResource
