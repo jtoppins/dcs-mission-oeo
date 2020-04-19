@@ -13,13 +13,13 @@ local RestrictedWeapons = {
 						{	["weaponName"] = "AIM-120B",
 							["weaponValue"] = 3,
 						},
-						{	["weaponName"] = "AIM-54A-Mk47",
+						{	["weaponName"] = "AIM_54A_Mk47", 
 							["weaponValue"] = 5,
 						},
-						{	["weaponName"] = "AIM-54A-Mk60",
+						{	["weaponName"] = "AIM_54A_Mk60",
 							["weaponValue"] = 5,
 						},
-						{	["weaponName"] = "AIM-54C-Mk47",
+						{	["weaponName"] = "AIM_54C_Mk47",
 							["weaponValue"] = 5,
 						},
 						{	["weaponName"] = "SD-10",
@@ -52,35 +52,38 @@ local RestrictedWeapons = {
 						{	["weaponName"] = "AGM-62",
 							["weaponValue"] = 10,
 						},
-						{	["weaponName"] = "GB-6 HE",
-							["weaponValue"] = 20,
+						{	["weaponName"] = "GB-6",
+							["weaponValue"] = 25,
 						},
-						{	["weaponName"] = "GB-6 SFW",
+						{	["weaponName"] = "GB-6-HE",
+							["weaponValue"] = 25,
+						},
+						{	["weaponName"] = "GB-6-SFW",
 							["weaponValue"] = 30,
 						},
-						{	["weaponName"] = "LS-5-600",
-							["weaponValue"] = 30,
+						{	["weaponName"] = "LS-6-500",
+							["weaponValue"] = 25,
 						},
-						{	["weaponName"] = "C-802AKG",
-							["weaponValue"] = 40,
+						{	["weaponName"] = "CM-802AKG",
+							["weaponValue"] = 35,
 						},
 						{	["weaponName"] = "C-802AK",
 							["weaponValue"] = 15,
 						},
 						{	["weaponName"] = "AGM-88C",
-							["weaponValue"] = 15,
+							["weaponValue"] = 10,
 						},
 						{	["weaponName"] = "AGM-84D",
 							["weaponValue"] = 15,
 						},
 						{	["weaponName"] = "LD-10",
-							["weaponValue"] = 15,
+							["weaponValue"] = 10,
 						},
 						{	["weaponName"] = "AGM-154A",
-							["weaponValue"] = 30,
+							["weaponValue"] = 25,
 						},
 						{	["weaponName"] = "AGM-154C",
-							["weaponValue"] = 30,
+							["weaponValue"] = 25,
 						},
 						{	["weaponName"] = "AGM-65E",
 							["weaponValue"] = 10,
@@ -115,11 +118,14 @@ local RestrictedWeapons = {
 						{	["weaponName"] = "CBU-99",
 							["weaponValue"] = 5,
 						},
+						{	["weaponName"] = "CBU-103",
+							["weaponValue"] = 5,
+						},
 						{	["weaponName"] = "CBU-105",
 							["weaponValue"] = 15,
 						},
 						{	["weaponName"] = "CBU-107",
-							["weaponValue"] = 5,
+							["weaponValue"] = 15,
 						},
 						{	["weaponName"] = "CBU-109",
 							["weaponValue"] = 5,
@@ -142,6 +148,7 @@ local RestrictedAirframes = {
 							["AGMax"] = 80,
 						},
 }
+	
 
 function LoadoutChecker(targetGroup)
 	--env.info("BEGINNING LOADOUT CHECKER")
@@ -152,9 +159,9 @@ function LoadoutChecker(targetGroup)
 	local WeaponValue = 0
 	local AirframeMaxAA = 0
 	local AirframeMaxAG = 0
-
-	--env.info("Target Type is an "..target:getTypeName())
-
+	
+	--env.info("Target Type is an "..target:getTypeName())	
+	
 	for k = 1, #RestrictedAirframes do
 		if target:getTypeName() == RestrictedAirframes[k].Type
 			then
@@ -168,7 +175,7 @@ function LoadoutChecker(targetGroup)
 
 	--env.info("Target AA Max = "..AirframeMaxAA)
 	--env.info("Target AG Max = "..AirframeMaxAG)
-
+	
 	for i = 1, #EquippedLoadout do
 		local TotalWeaponValue = 0
 		local EquippedWeaponCount = EquippedLoadout[i].count
@@ -189,7 +196,7 @@ function LoadoutChecker(targetGroup)
 			end
 		end
 		--env.info("Total Weapon Value = "..TotalWeaponValue)
-		if EquippedWeaponName == "AIM-120C" or EquippedWeaponName == "AIM-120B" or EquippedWeaponName == "SD-10" or EquippedWeaponName == "R-77"
+		if EquippedWeaponName == "AIM-120B" or EquippedWeaponName == "AIM-120C" or EquippedWeaponName == "AIM_54A_Mk47" or  EquippedWeaponName == "AIM_54A_Mk60" or EquippedWeaponName == "AIM_54C_Mk47" or EquippedWeaponName == "SD-10" or EquippedWeaponName == "R-77"
 			then
 				--env.info("Its an AA Missile.")
 				AirLoadoutValue = AirLoadoutValue + TotalWeaponValue
@@ -198,12 +205,12 @@ function LoadoutChecker(targetGroup)
 				--env.info("Its a Ground Weapon.")
 				GroundLoadoutValue = GroundLoadoutValue + TotalWeaponValue
 				--env.info("Set Ground Value to "..GroundLoadoutValue)
-
+				
 			end
 		--env.info("Air Value = "..AirLoadoutValue)
 		--env.info("Ground Value = "..GroundLoadoutValue)
 		end
-
+		
 	if	AirLoadoutValue > AirframeMaxAA or GroundLoadoutValue > AirframeMaxAG
 		then
 			if target:inAir() == true
@@ -230,12 +237,12 @@ end
 LoadoutsMenuPlayerIDs = {}
 
 function AddLoadoutF10Check:onEvent(event)
-	if event.id == 15 and event.initiator and event.initiator:getPlayerName() ~= nil
+	if event.id == world.event.S_EVENT_BIRTH and event.initiator and event.initiator:getPlayerName() ~= nil
 		then
 			local SpawnedPlayer = event.initiator
 			local PlayerID = SpawnedPlayer:getGroup():getID()
-				if 	LoadoutsMenuPlayerIDs[PlayerID] == nil
-					then
+				if 	LoadoutsMenuPlayerIDs[PlayerID] == nil 
+					then	
 						LoadoutsMenuPlayerIDs[PlayerID] = true
 						missionCommands.addCommandForGroup(PlayerID, "Validate Loadout", nil, LoadoutChecker, SpawnedPlayer:getGroup())
 				else
@@ -247,7 +254,7 @@ end
 -- Perform Loadout Check on Player Takeoff --
 
 function TakeoffLoadoutCheck:onEvent(event)
-	if event.id == 3 and event.initiator and event.initiator:getPlayerName() ~= nil
+	if event.id == world.event.S_EVENT_TAKEOFF and event.initiator and event.initiator:getPlayerName() ~= nil
 		then
 			--env.info("Player Departed, checking loadout")
 			local LoadoutCheckTarget = event.initiator:getGroup()
@@ -256,11 +263,9 @@ function TakeoffLoadoutCheck:onEvent(event)
 end
 
 function KickWarning(target)
-	if target:inAir() == false
+	if target:inAir() == true
 		then
-			return
-	else
-		trigger.action.outTextForGroup(target:getGroup():getID(), "WARNING! You are still airborne with an invalid loadout! You will be removed to spectator in ONE MINUTE unless you land and re-arm!", 30, 1)
+			trigger.action.outTextForGroup(target:getGroup():getID(), "WARNING! You are still airborne with an invalid loadout! You will be removed to spectator in ONE MINUTE unless you land and re-arm!", 30, 1)
 	end
 end
 
@@ -278,9 +283,9 @@ function PlayerKicker(target)
 	local WeaponValue = 0
 	local AirframeMaxAA = 0
 	local AirframeMaxAG = 0
-
-	--env.info("Target Type is an "..target:getTypeName())
-
+	
+	--env.info("Target Type is an "..target:getTypeName())	
+	
 	for k = 1, #RestrictedAirframes do
 		if target:getTypeName() == RestrictedAirframes[k].Type
 			then
@@ -294,7 +299,7 @@ function PlayerKicker(target)
 
 	--env.info("Target AA Max = "..AirframeMaxAA)
 	--env.info("Target AG Max = "..AirframeMaxAG)
-
+	
 	for i = 1, #EquippedLoadout do
 		local TotalWeaponValue = 0
 		local EquippedWeaponCount = EquippedLoadout[i].count
@@ -319,12 +324,12 @@ function PlayerKicker(target)
 				--env.info("Its a Ground Weapon.")
 				GroundLoadoutValue = GroundLoadoutValue + TotalWeaponValue
 				--env.info("Set Ground Value to "..GroundLoadoutValue)
-
+				
 			end
 		--env.info("Air Value = "..AirLoadoutValue)
 		--env.info("Ground Value = "..GroundLoadoutValue)
 		end
-
+		
 	if	AirLoadoutValue > AirframeMaxAA or GroundLoadoutValue > AirframeMaxAG
 			then
 				--env.info("Destroying Target!")
@@ -346,6 +351,6 @@ function NukeChecker(target)
 			--env.info("Kicked Player for Nukes")
 	end
 end
-
+	
 world.addEventHandler(TakeoffLoadoutCheck)
 world.addEventHandler(AddLoadoutF10Check)
